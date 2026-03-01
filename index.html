@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroStickBrasil - O Melhor do Game Retrô</title>
+    <style>
+        /* [ignoring loop detection] */
+        /* CSS RESET & BASE - EDITORIAL MINIMALISM */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-radius: 0 !important;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: "Georgia", serif; /* Editorial feel */
+            line-height: 1.8;
+        }
+
+        .sans { font-family: "Helvetica", "Arial", sans-serif; }
+
+        a {
+            color: #000000;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: none;
+            background: #000;
+            color: #fff;
+        }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid #000;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: "Helvetica", sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-family: "Helvetica", sans-serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* ARTICLE LAYOUT */
+        .container {
+            max-width: 1000px; /* Increased to accommodate sidebar */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .article-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sidebar {
+            width: 250px;
+            position: sticky;
+            top: 20px;
+        }
+
+        .banner-sidebar {
+            background: #f4f4f4;
+            border: 1px solid #000;
+            padding: 20px;
+            text-align: center;
+            font-family: "Helvetica", sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .banner-sidebar img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border: 1px solid #000;
+        }
+
+        .article-header {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .article-header h1 {
+            font-family: "Helvetica", sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .article-meta {
+            font-family: "Helvetica", sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: flex;
+            gap: 15px;
+            opacity: 0.6;
+            border-bottom: 1px solid #000;
+            padding-bottom: 10px;
+        }
+
+        /* TABLE OF CONTENTS */
+        .toc-box {
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #000;
+        }
+
+        .toc-box h3 {
+            font-family: "Helvetica", sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            display: block;
+            padding-bottom: 8px;
+        }
+
+        .toc-list {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .toc-list li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        .toc-list li:last-child {
+            border-bottom: none;
+        }
+
+        .toc-list a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: opacity 0.2s;
+        }
+
+        .toc-list a:hover {
+            opacity: 0.7;
+        }
+
+        /* FEATURED PRODUCTS GRID */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .product-card {
+            border: 1px solid #000;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+        }
+
+        .product-card h4 {
+            font-family: "Helvetica", sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .btn-amazon {
+            display: block;
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            font-family: "Helvetica", sans-serif;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .btn-shopee {
+            display: block;
+            background: #ee4d2d; /* Shopee Orange-Red */
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            font-family: "Helvetica", sans-serif;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .btn-shopee:hover {
+            background: #d73211;
+        }
+
+        /* CONTENT STYLING */
+        .content-body h2 {
+            font-family: "Helvetica", sans-serif;
+            font-size: 1.3rem;
+            margin: 25px 0 12px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: -0.3px;
+            line-height: 1.1;
+        }
+
+        .content-body h3 {
+            font-family: "Helvetica", sans-serif;
+            font-size: 1.1rem;
+            margin: 20px 0 10px;
+            font-weight: 900;
+            color: #333;
+        }
+
+        .content-body h4 {
+            font-family: "Helvetica", sans-serif;
+            font-size: 0.9rem;
+            margin: 15px 0 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+        }
+
+        .content-body p:first-of-type::first-letter {
+            float: left;
+            font-size: 2.8rem;
+            line-height: 1;
+            padding-right: 8px;
+            font-family: "Georgia", serif;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .content-body p, .content-body div {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #111;
+            display: block;
+            text-align: justify;
+            font-family: "Georgia", serif;
+        }
+
+        .content-body ul, .content-body ol {
+            margin-bottom: 40px;
+            padding-left: 40px;
+            list-style-type: square;
+        }
+
+        .content-body li {
+            margin-bottom: 15px;
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+
+        .content-body blockquote {
+            border-left: 5px solid #000;
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+            background: #f4f4f4;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            font-family: "Georgia", serif;
+        }
+
+        .content-body img {
+            max-width: 100%;
+            display: block;
+            margin: 40px auto;
+            border: 1px solid #000;
+            box-shadow: 10px 10px 0px #eee;
+        }
+
+        .content-body strong {
+            font-weight: 800;
+        }
+
+        /* ADMIN GUIDE */
+        .format-guide {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.75rem;
+        }
+
+        .format-guide code {
+            background: #eee;
+            padding: 2px 5px;
+            font-weight: bold;
+        }
+
+        /* ADMIN & FORMS */
+        .admin-section {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: "Helvetica", sans-serif;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #000;
+            font-family: inherit;
+        }
+
+        .form-group textarea { height: 400px; }
+
+        .btn-action {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 10px 20px;
+            font-family: "Helvetica", sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .btn-action:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        /* URL DISPLAY FOR SEARCH CONSOLE */
+        .url-display {
+            background: #eee;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            word-break: break-all;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+            .article-layout { flex-direction: column; }
+            .sidebar { width: 100%; position: static; }
+            .header-inner { flex-direction: column; gap: 15px; text-align: center; }
+            .nav-links { justify-content: center; flex-wrap: wrap; }
+        }
+
+        @media (max-width: 600px) {
+            .article-header h1 { font-size: 1.5rem; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+
+        .hidden { display: none !important; }
+        .nav-admin-container { display: inline-flex; gap: 15px; align-items: center; }
+
+        /* COOKIE BANNER */
+        #cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+            padding: 20px;
+            z-index: 10000;
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            font-family: "Helvetica", sans-serif;
+        }
+
+        #cookie-banner p {
+            font-size: 0.85rem;
+            color: #444;
+            margin: 0;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-cookie {
+            padding: 8px 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-cookie-accept {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-cookie-info {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .btn-cookie:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            #cookie-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+            padding: 80px 20px 40px;
+            margin-top: 100px;
+            font-family: "Helvetica", sans-serif;
+            color: #666;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: #000;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .footer-col p {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            font-size: 0.75rem;
+            text-decoration: none;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-col ul li a:hover {
+            color: #000;
+            background: none;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 800px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 500px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cookie-banner">
+        <p>Ao continuar navegando, você concorda com nossa Política de Cookies e Privacidade.</p>
+        <div class="cookie-buttons">
+            <button class="btn-cookie btn-cookie-accept" onclick="acceptCookies()">Aceitar</button>
+            <button class="btn-cookie btn-cookie-info" onclick="navigateTo('home')">Saiba mais</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-inner">
+            <div class="logo" onclick="navigateTo('home')">RetroStickBrasil</div>
+            <nav class="nav-links">
+                <a onclick="navigateTo('home')">Início</a>
+                <a onclick="navigateTo('post-detail', { id: 1710000000000 })">Review Completa</a>
+                <a onclick="navigateTo('post-detail', { id: 1710000000001 })">Melhores Retros</a>
+                <a onclick="navigateTo('post-detail', { id: 1710000000002 })">Melhores Games</a>
+                <a onclick="navigateTo('login')" id="nav-login">Admin</a>
+                <div id="nav-admin" class="nav-admin-container hidden">
+                    <a onclick="navigateTo('admin')">Painel</a>
+                    <a onclick="logout()" style="color: #ff4444; font-size: 0.7rem; font-weight: bold; cursor: pointer;">Sair</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main-view"></div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px; cursor: pointer;" onclick="navigateTo('home')">RetroStickBrasil</div>
+                    <p>O seu guia definitivo para o mundo dos games retrô. Reviews honestas, comparativos detalhados e as melhores recomendações de consoles e jogos clássicos para quem ama nostalgia.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('post-detail', { id: 1710000000000 })">Review Completa</a></li>
+                        <li><a onclick="navigateTo('post-detail', { id: 1710000000001 })">Melhores Retros</a></li>
+                        <li><a onclick="navigateTo('post-detail', { id: 1710000000002 })">Melhores Games</a></li>
+                        <li><a onclick="navigateTo('home')">Consoles Portáteis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Institucional</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('about')">Sobre Nós</a></li>
+                        <li><a onclick="navigateTo('contact')">Contato</a></li>
+                        <li><a onclick="navigateTo('privacy')">Privacidade</a></li>
+                        <li><a onclick="navigateTo('terms')">Termos de Uso</a></li>
+                        <li><a onclick="navigateTo('affiliates')">Afiliados</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="display: flex; flex-direction: column; align-items: flex-end;">
+                    <button class="btn-action" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="font-size: 0.6rem; padding: 8px 15px;">Voltar ao Topo ↑</button>
+                    <div style="margin-top: 20px;">
+                        <a onclick="navigateTo('home')" style="font-size: 0.65rem; text-transform: uppercase; text-decoration: none; font-weight: bold;">Início do Blog</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2026 RetroStickBrasil - Todos os direitos reservados.</div>
+                <div>Feito com paixão por games retrô.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TEMPLATES -->
+
+    <!-- Home Template -->
+    <template id="tpl-home">
+        <div class="container">
+            <h2 class="sans" style="text-transform: uppercase; font-size: 0.9rem; border-bottom: 2px solid #000; margin-bottom: 30px;">Guias e Reviews Recentes</h2>
+            <div id="home-posts"></div>
+        </div>
+    </template>
+
+    <!-- Post Detail Template -->
+    <template id="tpl-post-detail">
+        <div class="container">
+            <div class="article-layout">
+                <div class="main-content">
+                    <article>
+                        <header class="article-header">
+                            <h1 id="view-title"></h1>
+                            <div class="article-meta">
+                                <span id="view-author"></span>
+                                <span id="view-date"></span>
+                                <span id="view-reading-time"></span>
+                            </div>
+                        </header>
+
+                        <div id="view-toc" class="toc-box">
+                            <h3>Índice do Artigo</h3>
+                            <ul id="toc-list" class="toc-list"></ul>
+                        </div>
+
+                        <div id="view-content" class="content-body"></div>
+                    </article>
+                </div>
+
+                <aside class="sidebar">
+                    <div class="banner-sidebar">
+                        <img src="https://i.postimg.cc/4y4V0Rrf/game-retro.webp" alt="Video Game Retro" referrerPolicy="no-referrer">
+                        <p>Oferta Especial: Retro Stick</p>
+                        <a href="https://s.shopee.com.br/6AfvP3Udpl" class="btn-shopee" style="margin-top: 10px;" target="_blank">Ver Preço Shopee</a>
+                    </div>
+
+                    <div id="sidebar-popular" style="margin-bottom: 25px;">
+                        <h3 style="font-family: Helvetica, sans-serif; font-size: 0.7rem; text-transform: uppercase; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 12px; letter-spacing: 1px;">Destaques</h3>
+                        <div id="popular-list"></div>
+                    </div>
+
+                    <div id="sidebar-recent" style="margin-bottom: 30px;">
+                        <h3 style="font-family: Helvetica, sans-serif; font-size: 0.7rem; text-transform: uppercase; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 12px; letter-spacing: 1px;">Últimas Postagens</h3>
+                        <div id="recent-sidebar-list"></div>
+                    </div>
+                    
+                    <div class="banner-sidebar" style="background: #000; color: #fff; padding: 15px;">
+                        <p style="margin-bottom: 5px; font-size: 0.65rem;">Newsletter</p>
+                        <p style="font-size: 0.6rem; opacity: 0.7; margin-bottom: 10px; text-transform: none;">Receba as melhores reviews por e-mail.</p>
+                        <input type="email" placeholder="Seu e-mail" style="width: 100%; margin-bottom: 8px; padding: 6px; border: 1px solid #fff; background: #222; color: #fff; font-size: 0.7rem;">
+                        <button style="width: 100%; background: #fff; color: #000; border: none; padding: 8px; font-weight: bold; cursor: pointer; font-size: 0.7rem; text-transform: uppercase;">Inscrever</button>
+                    </div>
+                </aside>
+            </div>
+            
+            <div style="margin-top: 80px; border-top: 1px solid #000; padding-top: 20px;">
+                <a onclick="navigateTo('home')">← Voltar para o Início</a>
+            </div>
+        </div>
+    </template>
+
+    <!-- Login Template -->
+    <template id="tpl-login">
+        <div class="container" style="max-width: 400px; margin-top: 100px;">
+            <h2 class="sans">ACESSO RESTRITO</h2>
+            <div class="form-group">
+                <label>Usuário</label>
+                <input type="text" id="auth-u">
+            </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" id="auth-p">
+            </div>
+            <button class="btn-action" onclick="handleAuth()">Entrar</button>
+            <div style="margin-top: 20px; font-size: 0.7rem; opacity: 0.6;">
+                <p>Dica: Usuário padrão é <strong>admin</strong></p>
+                <p style="margin-top: 10px; cursor: pointer; text-decoration: underline;" onclick="resetToDefaultAuth()">Esqueceu a senha? Resetar para o padrão.</p>
+            </div>
+        </div>
+    </template>
+
+    <!-- Admin Template -->
+    <template id="tpl-admin">
+        <div class="admin-section">
+            <h2 class="sans">PAINEL DE PUBLICAÇÃO</h2>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #000;">
+            
+            <div id="editor">
+                <h3 id="editor-title" class="sans" style="font-size: 0.8rem; margin-bottom: 20px;">NOVO ARTIGO</h3>
+                <input type="hidden" id="edit-id">
+                
+                <div class="form-group">
+                    <label>Título do Guia</label>
+                    <input type="text" id="post-title" placeholder="Ex: Melhor Raquete de Tênis de 2024">
+                </div>
+
+                <div class="form-group">
+                    <label>Autor</label>
+                    <input type="text" id="post-author" placeholder="Seu Nome">
+                </div>
+
+                <div class="form-group">
+                    <label>Slug (URL amigável - opcional)</label>
+                    <input type="text" id="post-slug" placeholder="melhor-raquete-tenis">
+                </div>
+
+                <div class="form-group">
+                    <label>Conteúdo (Use H2 para o índice)</label>
+                    <textarea id="post-content" placeholder="Escreva seu artigo aqui..."></textarea>
+                </div>
+
+                <button class="btn-action" onclick="savePost()">Publicar Guia</button>
+                <button class="btn-action" onclick="resetEditor()">Limpar</button>
+                <button class="btn-action" onclick="applyAutoFormat()" style="border-color: #000; background: #f0f0f0;">Auto-Formatar Texto</button>
+
+                <div class="format-guide">
+                    <h4 class="sans" style="margin-bottom: 10px;">Guia de Formatação:</h4>
+                    <p>• Use <code>&lt;h2&gt;Título&lt;/h2&gt;</code> para seções principais (aparecem no índice).</p>
+                    <p>• Use <code>&lt;h3&gt;Subtítulo&lt;/h3&gt;</code> para detalhes dentro de uma seção.</p>
+                    <p>• Use <code>&lt;p&gt;Seu texto aqui&lt;/p&gt;</code> para parágrafos organizados.</p>
+                    <p>• Use <code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code> para listas.</p>
+                    <p>• Use <code>&lt;blockquote&gt;Citação&lt;/blockquote&gt;</code> para destaques.</p>
+                </div>
+            </div>
+
+            <hr style="margin: 40px 0; border: 0; border-top: 2px solid #000;">
+
+            <h3 class="sans" style="font-size: 0.8rem;">ARTIGOS PUBLICADOS</h3>
+            <div style="background: #fff; border: 1px solid #000; padding: 10px; margin: 15px 0; font-size: 0.7rem; font-family: Helvetica, sans-serif;">
+                <strong>Dica de SEO:</strong> Para indexar seus artigos no Google, copie a URL de cada postagem abaixo e cole na ferramenta de <strong>Inspeção de URL</strong> do seu <a href="https://search.google.com/search-console" target="_blank" style="text-decoration: underline;">Google Search Console</a>.
+            </div>
+            <div id="admin-posts-list" style="margin-top: 20px;"></div>
+
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #000;">
+            <h3 class="sans" style="font-size: 0.8rem;">CONFIGURAÇÕES DE ACESSO</h3>
+            <div id="auth-settings" style="background: #f9f9f9; border: 1px solid #000; padding: 20px; margin-top: 20px;">
+                <div class="form-group">
+                    <label>Novo Usuário</label>
+                    <input type="text" id="new-u" placeholder="Ex: admin">
+                </div>
+                <div class="form-group">
+                    <label>Nova Senha</label>
+                    <input type="password" id="new-p" placeholder="Sua nova senha">
+                </div>
+                <button class="btn-action" onclick="updateAdminAuth()">Salvar Novo Acesso</button>
+            </div>
+
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #000;">
+            <h3 class="sans" style="font-size: 0.8rem;">SNIPPET: CARTÃO DE PRODUTO (Copie e cole no conteúdo)</h3>
+            <div class="url-display" style="background: #f0f0f0; border: 1px dashed #000;">
+&lt;div class="product-card"&gt;
+  &lt;img src="URL_DA_IMAGEM"&gt;
+  &lt;h4&gt;NOME DO PRODUTO&lt;/h4&gt;
+  &lt;a href="LINK_AFILIADO" class="btn-amazon"&gt;Ver na Amazon&lt;/a&gt;
+&lt;/div&gt;
+            </div>
+            
+            <div style="margin-top: 40px; border-top: 1px solid #000; padding-top: 20px;">
+                <button class="btn-action" onclick="wipeData()" style="background: #000; color: #fff;">APAGAR TUDO</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Affiliates Template -->
+    <template id="tpl-affiliates">
+        <div class="container">
+            <div class="main-content" style="max-width: 800px; margin: 0 auto;">
+                <article>
+                    <header class="article-header">
+                        <h1 class="sans">Programa de Afiliados – RetroStickBrasil</h1>
+                    </header>
+                    <div class="content-body">
+                        <p>O RetroStickBrasil participa de programas de afiliados. Isso significa que, em alguns conteúdos do nosso site, podemos receber uma pequena comissão quando você realiza uma compra através dos links recomendados.</p>
+                        
+                        <h2>Como Funciona?</h2>
+                        <p>Quando indicamos um console retrô, acessório ou jogo, utilizamos links de parceiros confiáveis. Se você clicar em um desses links e fizer a compra, podemos receber uma comissão — sem nenhum custo adicional para você.</p>
+                        
+                        <h2>Nosso Compromisso</h2>
+                        <ul>
+                            <li>✔️ Todas as reviews são feitas com base em pesquisa e análise criteriosa.</li>
+                            <li>✔️ Nossa opinião não é influenciada por comissões.</li>
+                            <li>✔️ Indicamos apenas produtos que realmente acreditamos valer a pena.</li>
+                        </ul>
+                        
+                        <p>Nosso objetivo é manter o site ativo, produzir conteúdos de qualidade e ajudar você a escolher os melhores consoles e games retrô com segurança.</p>
+                        
+                        <blockquote style="background: #e3f2fd; border-left-color: #007bff;">
+                            Agradecemos por apoiar o RetroStickBrasil 💙 Sua confiança é o que mantém nosso projeto vivo!
+                        </blockquote>
+                    </div>
+                </article>
+                <div style="margin-top: 40px; border-top: 1px solid #000; padding-top: 20px;">
+                    <a onclick="navigateTo('home')">← Voltar para o Início</a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Privacy Template -->
+    <template id="tpl-privacy">
+        <div class="container">
+            <div class="main-content" style="max-width: 800px; margin: 0 auto;">
+                <article>
+                    <header class="article-header">
+                        <h1 class="sans">Política de Privacidade – RetroStickBrasil</h1>
+                    </header>
+                    <div class="content-body">
+                        <p>A sua privacidade é importante para nós. Esta Política de Privacidade explica como o RetroStickBrasil coleta, usa e protege suas informações ao navegar em nosso site.</p>
+                        
+                        <h2>1. Coleta de Informações</h2>
+                        <p>Podemos coletar informações de duas formas:</p>
+                        
+                        <h3>Informações fornecidas por você:</h3>
+                        <p>Nome e e-mail enviados através do formulário de contato.</p>
+                        
+                        <h3>Informações automáticas:</h3>
+                        <ul>
+                            <li>Endereço IP</li>
+                            <li>Tipo de navegador</li>
+                            <li>Dispositivo utilizado</li>
+                            <li>Páginas acessadas e tempo de navegação</li>
+                        </ul>
+                        <p>Esses dados são coletados para melhorar sua experiência no site.</p>
+                        
+                        <h2>2. Uso de Cookies</h2>
+                        <p>Utilizamos cookies para:</p>
+                        <ul>
+                            <li>✔️ Melhorar o desempenho do site</li>
+                            <li>✔️ Analisar métricas de acesso</li>
+                            <li>✔️ Exibir anúncios relevantes</li>
+                        </ul>
+                        <p>Você pode desativar os cookies nas configurações do seu navegador, se preferir.</p>
+                        
+                        <h2>3. Programas de Afiliados e Publicidade</h2>
+                        <p>O RetroStickBrasil pode participar de programas de afiliados e plataformas de publicidade. Isso significa que podemos receber comissão por compras realizadas através de links indicados em nossos conteúdos.</p>
+                        <p>Esses parceiros podem utilizar cookies para rastrear as compras e acessos.</p>
+                        
+                        <h2>4. Compartilhamento de Informações</h2>
+                        <p>Não vendemos, trocamos ou transferimos suas informações pessoais para terceiros, exceto quando necessário para:</p>
+                        <ul>
+                            <li>Cumprimento de obrigações legais</li>
+                            <li>Operação do site</li>
+                            <li>Serviços de análise e publicidade</li>
+                        </ul>
+                        
+                        <h2>5. Segurança das Informações</h2>
+                        <p>Adotamos medidas de segurança para proteger seus dados contra acessos não autorizados, alterações ou divulgação indevida.</p>
+                        
+                        <h2>6. Links Externos</h2>
+                        <p>Nosso site pode conter links para sites externos. Não somos responsáveis pelas políticas de privacidade ou conteúdos desses sites.</p>
+                        
+                        <h2>7. Alterações nesta Política</h2>
+                        <p>Esta Política de Privacidade pode ser atualizada a qualquer momento. Recomendamos que você revise esta página periodicamente.</p>
+                        
+                        <p style="margin-top: 40px; font-size: 0.8rem; opacity: 0.7;">Última atualização: 28 de fevereiro de 2026<br>© 2026 RetroStickBrasil – Todos os direitos reservados.</p>
+                    </div>
+                </article>
+                <div style="margin-top: 40px; border-top: 1px solid #000; padding-top: 20px;">
+                    <a onclick="navigateTo('home')">← Voltar para o Início</a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Terms Template -->
+    <template id="tpl-terms">
+        <div class="container">
+            <div class="main-content" style="max-width: 800px; margin: 0 auto;">
+                <article>
+                    <header class="article-header">
+                        <h1 class="sans">Termos de Uso – RetroStickBrasil</h1>
+                    </header>
+                    <div class="content-body">
+                        <p>Ao acessar e utilizar o site RetroStickBrasil, você concorda com os termos e condições descritos abaixo. Caso não concorde com qualquer parte destes termos, recomendamos que não utilize o site.</p>
+                        
+                        <h2>1. Sobre o Site</h2>
+                        <p>O RetroStickBrasil é um portal informativo dedicado a reviews, comparativos e recomendações sobre consoles retrô, jogos clássicos e produtos relacionados ao universo gamer.</p>
+                        <p>Nosso conteúdo é produzido com base em pesquisas, análises e opiniões independentes.</p>
+                        
+                        <h2>2. Uso do Conteúdo</h2>
+                        <p>Todo o conteúdo publicado no site — incluindo textos, imagens, logotipo e estrutura — é protegido por direitos autorais.</p>
+                        
+                        <h3>Você pode:</h3>
+                        <ul>
+                            <li>✔️ Ler e compartilhar links do conteúdo</li>
+                            <li>✔️ Utilizar informações para fins pessoais</li>
+                        </ul>
+                        
+                        <h3>Você não pode:</h3>
+                        <ul>
+                            <li>❌ Copiar, reproduzir ou redistribuir conteúdos sem autorização</li>
+                            <li>❌ Utilizar o conteúdo para fins comerciais sem permissão</li>
+                        </ul>
+                        
+                        <h2>3. Responsabilidade das Informações</h2>
+                        <p>Nos esforçamos para manter todas as informações atualizadas e corretas. No entanto:</p>
+                        <ul>
+                            <li>Não garantimos que todas as informações estejam sempre completas ou livres de erros.</li>
+                            <li>Os preços e disponibilidade de produtos podem mudar sem aviso prévio.</li>
+                            <li>O usuário é responsável por verificar as informações diretamente com o vendedor antes de realizar qualquer compra.</li>
+                        </ul>
+                        
+                        <h2>4. Links de Terceiros e Afiliados</h2>
+                        <p>O RetroStickBrasil pode conter links para sites externos e programas de afiliados.</p>
+                        <p>Não somos responsáveis por:</p>
+                        <ul>
+                            <li>Conteúdos de sites terceiros</li>
+                            <li>Políticas de privacidade externas</li>
+                            <li>Entregas, garantias ou atendimento prestado por lojas parceiras</li>
+                        </ul>
+                        
+                        <h2>5. Comentários e Conduta do Usuário</h2>
+                        <p>Caso o site permita comentários ou interação, o usuário se compromete a:</p>
+                        <ul>
+                            <li>✔️ Não publicar conteúdo ofensivo, ilegal ou discriminatório</li>
+                            <li>✔️ Não divulgar spam ou links maliciosos</li>
+                            <li>✔️ Respeitar outros usuários</li>
+                        </ul>
+                        <p>O site se reserva o direito de remover conteúdos que violem essas regras.</p>
+                        
+                        <h2>6. Modificações nos Termos</h2>
+                        <p>O RetroStickBrasil pode alterar estes Termos de Uso a qualquer momento, sem aviso prévio. Recomendamos a revisão periódica desta página.</p>
+                    </div>
+                </article>
+                <div style="margin-top: 40px; border-top: 1px solid #000; padding-top: 20px;">
+                    <a onclick="navigateTo('home')">← Voltar para o Início</a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Contact Template -->
+    <template id="tpl-contact">
+        <div class="container">
+            <div class="main-content" style="max-width: 600px; margin: 0 auto; text-align: center; padding: 60px 20px;">
+                <article>
+                    <header class="article-header" style="text-align: center;">
+                        <h1 class="sans">Contato – RetroStickBrasil</h1>
+                    </header>
+                    <div class="content-body" style="text-align: center;">
+                        <p style="font-size: 1.2rem; margin-bottom: 30px;">Tem alguma dúvida, sugestão ou parceria?<br>Ficaremos felizes em falar com você!</p>
+                        
+                        <div style="background: #f9f9f9; border: 1px solid #000; padding: 40px; margin: 40px 0;">
+                            <p style="font-family: Helvetica, sans-serif; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; margin-bottom: 15px;">Para mais informações, entre em contato pelo e-mail:</p>
+                            <a href="mailto:onlinemas98@gmail.com" style="font-size: 1.5rem; font-weight: bold; text-decoration: none; color: #000; display: block; margin-bottom: 15px;">📩 onlinemas98@gmail.com</a>
+                            <p style="font-style: italic; opacity: 0.7;">Respondemos o mais breve possível.</p>
+                        </div>
+                    </div>
+                </article>
+                <div style="margin-top: 40px; border-top: 1px solid #000; padding-top: 20px;">
+                    <a onclick="navigateTo('home')">← Voltar para o Início</a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- About Template -->
+    <template id="tpl-about">
+        <div class="container">
+            <div class="main-content" style="max-width: 800px; margin: 0 auto;">
+                <article>
+                    <header class="article-header">
+                        <h1 class="sans">Sobre Nós – RetroStickBrasil</h1>
+                    </header>
+                    <div class="content-body">
+                        <p>O RetroStickBrasil nasceu da paixão pelos games retrô e pela nostalgia que marcou gerações. Nosso objetivo é ajudar você a reviver os clássicos da melhor forma possível, com informações claras, análises honestas e recomendações confiáveis.</p>
+                        
+                        <h2>Somos um portal especializado em:</h2>
+                        <ul>
+                            <li>🎮 Reviews completas de consoles retrô</li>
+                            <li>🕹️ Comparativos detalhados</li>
+                            <li>⭐ Listas dos melhores games clássicos</li>
+                            <li>📦 Guias para escolher o console ideal</li>
+                        </ul>
+                        
+                        <p>Acreditamos que videogame não é apenas entretenimento — é memória, história e emoção. Por isso, buscamos entregar conteúdos bem pesquisados e atualizados para que você faça escolhas seguras na hora de comprar.</p>
+                        
+                        <p>Alguns dos consoles que marcaram época, como o Super Nintendo Entertainment System e o PlayStation 3, continuam sendo referência no mundo gamer — e aqui você encontra tudo sobre eles e muito mais.</p>
+                        
+                        <p>Nosso compromisso é com a transparência. Participamos de programas de afiliados, mas nossas análises são independentes e focadas sempre na melhor experiência para o leitor.</p>
+                        
+                        <blockquote style="margin-top: 40px; border-left: 4px solid #000; padding-left: 20px; font-style: italic;">
+                            RetroStickBrasil – Seu guia definitivo no mundo dos games retrô.
+                        </blockquote>
+                    </div>
+                </article>
+                <div style="margin-top: 40px; border-top: 1px solid #000; padding-top: 20px;">
+                    <a onclick="navigateTo('home')">← Voltar para o Início</a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // --- DATA ---
+        const defaultPost = {
+            id: 1,
+            title: "🎮 Os 5 Melhores Games Retrô de Todos os Tempos",
+            author: "Redação Retro",
+            slug: "melhores-games-retro",
+            date: new Date().toLocaleDateString('pt-BR'),
+            content: `
+                <p>Os games retrô marcaram gerações e continuam conquistando fãs até hoje. Mesmo com gráficos simples, muitos desses jogos oferecem diversão intensa, trilhas sonoras inesquecíveis e desafios que permanecem atuais. Se você ama nostalgia ou quer conhecer os clássicos que moldaram a indústria dos videogames, confira essa lista com os melhores jogos retrô de todos os tempos.</p>
+
+                <h2>🕹️ 1. Super Mario Bros. (1985)</h2>
+                <p><strong>Plataforma:</strong> Nintendo Entertainment System</p>
+                <p>Um dos jogos mais importantes da história. Criado pela Nintendo, o encanador Mario revolucionou o gênero de plataforma. Fases criativas, trilha sonora icônica e jogabilidade simples fizeram desse game um fenômeno mundial.</p>
+                <p><strong>🔹 Por que é um dos melhores?</strong></p>
+                <ul>
+                    <li>Jogabilidade viciante</li>
+                    <li>Níveis bem construídos</li>
+                    <li>Popularizou os videogames domésticos</li>
+                </ul>
+
+                <h2>👾 2. The Legend of Zelda (1986)</h2>
+                <p><strong>Plataforma:</strong> Nintendo Entertainment System</p>
+                <p>Misturando aventura, ação e exploração, esse clássico apresentou um mundo aberto inovador para a época. O herói Link se tornou um dos personagens mais famosos da história dos games.</p>
+                <p><strong>🔹 Destaques:</strong></p>
+                <ul>
+                    <li>Exploração livre</li>
+                    <li>Sistema de itens inovador</li>
+                    <li>Trilha sonora épica</li>
+                </ul>
+
+                <h2>🍄 3. Super Mario World (1990)</h2>
+                <p><strong>Plataforma:</strong> Super Nintendo Entertainment System</p>
+                <p>Considerado por muitos o melhor jogo 2D do Mario. Introduziu o Yoshi e trouxe gráficos muito mais coloridos e detalhados.</p>
+                <p><strong>🔹 Pontos fortes:</strong></p>
+                <ul>
+                    <li>Fases secretas</li>
+                    <li>Jogabilidade refinada</li>
+                    <li>Alto fator replay</li>
+                </ul>
+
+                <h2>⚡ 4. Sonic the Hedgehog (1991)</h2>
+                <p><strong>Plataforma:</strong> Sega Genesis</p>
+                <p>O mascote da Sega chegou com velocidade e atitude. Sonic virou rival direto do Mario nos anos 90.</p>
+                <p><strong>🔹 Por que marcou época?</strong></p>
+                <ul>
+                    <li>Velocidade inovadora</li>
+                    <li>Música eletrizante</li>
+                    <li>Design de fases criativo</li>
+                </ul>
+
+                <h2>🥊 5. Street Fighter II (1991)</h2>
+                <p><strong>Plataforma:</strong> Arcade / Super Nintendo Entertainment System</p>
+                <p>Esse jogo revolucionou os games de luta. Personagens como Ryu e Ken se tornaram ícones culturais.</p>
+                <p><strong>🔹 Destaques:</strong></p>
+                <ul>
+                    <li>Sistema de combos</li>
+                    <li>Personagens carismáticos</li>
+                    <li>Competitividade intensa</li>
+                </ul>
+
+                <h2>🎯 Por Que Games Retrô Ainda Fazem Sucesso?</h2>
+                <p>Mesmo com gráficos ultrarrealistas hoje em dia, os jogos clássicos continuam relevantes porque:</p>
+                <ul>
+                    <li>✔ Priorizam jogabilidade acima de tudo</li>
+                    <li>✔ São desafiadores</li>
+                    <li>✔ Têm identidade forte</li>
+                    <li>✔ Funcionam perfeitamente até hoje</li>
+                </ul>
+
+                <h2>🏆 Conclusão</h2>
+                <p>Os games retrô não são apenas nostalgia — são a base da indústria moderna dos videogames. Títulos como Super Mario Bros., Sonic, Zelda e Street Fighter II provaram que diversão não depende apenas de gráficos avançados.</p>
+                <p>Se você nunca jogou esses clássicos, vale muito a pena experimentar. E se já jogou… talvez seja hora de revisitar e sentir aquela nostalgia novamente. 🎮🔥</p>
+            `
+        };
+
+        const reviewPost = {
+            id: 1710000000000,
+            title: "🎮 Review Completa: Video Game Retro Stick Vale a Pena em 2026?",
+            author: "RetroStickBrasil",
+            slug: "review-completa-retro-stick-2026",
+            date: "28/02/2026",
+            content: `
+                <p>Se você está pensando em comprar um Video Game Retro Stick, provavelmente quer saber se ele realmente vale a pena, se funciona bem na TV e se entrega todos aqueles milhares de jogos prometidos.</p>
+                <p>Nesta review completa do Video Game Retro Stick, você vai descobrir todos os detalhes antes de investir seu dinheiro.</p>
+
+                <h2>🔍 O Que é o Video Game Retro Stick?</h2>
+                <p>O Video Game Retro Stick é um mini console portátil que conecta direto na entrada HDMI da TV. Ele promete trazer milhares de jogos clássicos em um único dispositivo compacto.</p>
+                <p>Normalmente ele inclui:</p>
+                <ul>
+                    <li>Jogos de arcade</li>
+                    <li>Jogos de Super Nintendo</li>
+                    <li>Jogos de Mega Drive</li>
+                    <li>Jogos de PlayStation 1</li>
+                    <li>Jogos de Nintendo 64 (em alguns modelos)</li>
+                </ul>
+                <p>A proposta é simples: nostalgia + praticidade.</p>
+
+                <h2>🎮 Design e Qualidade de Construção</h2>
+                <p>O Retro Stick é pequeno, leve e discreto. Ele funciona como um pendrive grande, que conecta diretamente na TV.</p>
+                <p><strong>Pontos positivos:</strong></p>
+                <ul>
+                    <li>Instalação simples</li>
+                    <li>Não precisa de configuração avançada</li>
+                    <li>Design compacto</li>
+                </ul>
+                <p><strong>Pontos negativos:</strong></p>
+                <ul>
+                    <li>Alguns modelos usam plástico simples</li>
+                    <li>Controles podem variar de qualidade</li>
+                </ul>
+
+                <h2>⚙ Como Funciona o Video Game Retro Stick?</h2>
+                <p>O funcionamento é muito simples:</p>
+                <ol>
+                    <li>Conecte na entrada HDMI da TV</li>
+                    <li>Conecte a alimentação USB</li>
+                    <li>Ligue os controles</li>
+                    <li>Escolha o jogo no menu</li>
+                </ol>
+                <p>Em menos de 2 minutos você já pode começar a jogar.</p>
+
+                <h2>🕹 Lista de Jogos: É Tudo Isso Mesmo?</h2>
+                <p>Muitos anúncios prometem 10 mil, 20 mil ou até 40 mil jogos.</p>
+                <p>Na prática:</p>
+                <ul>
+                    <li>Existem muitos jogos repetidos</li>
+                    <li>Alguns títulos são variações</li>
+                    <li>Nem todos os jogos são famosos</li>
+                </ul>
+                <p>Mesmo assim, a quantidade é enorme e garante diversão por muito tempo.</p>
+
+                <h2>📺 Funciona em Qualquer TV?</h2>
+                <p>Sim, desde que a TV tenha entrada HDMI.</p>
+                <p>Ele funciona em:</p>
+                <ul>
+                    <li>Smart TV</li>
+                    <li>TV LED</li>
+                    <li>TV LCD</li>
+                    <li>Monitores com HDMI</li>
+                </ul>
+                <p>Não precisa de internet para jogar.</p>
+
+                <h2>🚀 Desempenho e Qualidade Gráfica</h2>
+                <p>A maioria dos modelos entrega:</p>
+                <ul>
+                    <li>Resolução 720p ou 1080p</li>
+                    <li>Emulação estável para consoles 8 e 16 bits</li>
+                    <li>PS1 roda bem na maioria dos casos</li>
+                    <li>Nintendo 64 pode ter pequenas travadas</li>
+                </ul>
+                <p>Para jogos clássicos, o desempenho é satisfatório.</p>
+
+                <h2>🔊 Controles: São Bons?</h2>
+                <p>Depende do modelo. Alguns vêm com controle com fio ou sem fio 2.4GHz. A qualidade varia, mas para jogos casuais funciona bem.</p>
+
+                <h2>💰 Video Game Retro Stick Vale a Pena?</h2>
+                <p>Depende do seu objetivo. Vale a pena se você busca custo-benefício e facilidade. Pode não valer se você procura alta performance ou jogos online.</p>
+
+                <h2>🔎 É Melhor Que Montar um Console com Raspberry Pi?</h2>
+                <p>Para quem não quer configurar nada, o Retro Stick é mais prático. Já quem gosta de personalizar, pode preferir montar um sistema próprio.</p>
+
+                <h2>🏆 Conclusão da Review Completa</h2>
+                <p>O Video Game Retro Stick é uma excelente opção para quem quer reviver clássicos de forma simples e barata. Ele não é perfeito, mas entrega diversão imediata e muita nostalgia.</p>
+
+                <h2>⭐ Nota Final</h2>
+                <ul>
+                    <li>🎮 Custo-benefício: 8/10</li>
+                    <li>⚙ Facilidade de uso: 9/10</li>
+                    <li>🕹 Variedade de jogos: 8/10</li>
+                    <li>📺 Compatibilidade: 9/10</li>
+                </ul>
+            `
+        };
+
+        const melhoresRetrosPost = {
+            id: 1710000000001,
+            title: "🎮 Melhores Retros em 2026: Guia Completo Para Escolher o Console Ideal",
+            author: "RetroStickBrasil",
+            slug: "melhores-retros-guia-completo-2026",
+            date: "28/02/2026",
+            content: `
+                <p>Se você está procurando os Melhores Retros para comprar em 2026, este guia completo vai te ajudar a escolher o console ideal para reviver os clássicos da infância. Hoje existem diversas opções no mercado, desde modelos prontos para usar até dispositivos personalizáveis para quem quer mais desempenho.</p>
+                <p>Neste artigo sobre os Melhores Retros, você vai descobrir quais consoles realmente valem a pena, quais têm melhor custo-benefício e qual é ideal para o seu perfil.</p>
+
+                <h2>🕹 O Que São Consoles Retros?</h2>
+                <p>Consoles retros são dispositivos criados para rodar jogos clássicos de videogames antigos como Super Nintendo, Mega Drive, PlayStation 1, Nintendo 64 e Arcade. Eles utilizam sistemas de emulação para reproduzir jogos antigos com praticidade e conexão HDMI.</p>
+
+                <h2>🔥 Melhores Retros Para Comprar em 2026</h2>
+                <p>Abaixo estão os Melhores Retros do momento, considerando preço, desempenho e facilidade de uso.</p>
+
+                <h3>1️⃣ Video Game Retro Stick 4K</h3>
+                <p>O popular Retro Stick é uma das opções mais vendidas atualmente.</p>
+                <ul>
+                    <li><strong>Vantagens:</strong> Instalação simples (plug and play), milhares de jogos inclusos, preço acessível, funciona em qualquer TV com HDMI.</li>
+                    <li><strong>Desvantagens:</strong> Alguns jogos repetidos, Nintendo 64 pode ter pequenas travadas.</li>
+                </ul>
+                <p>É ideal para quem quer praticidade e custo-benefício.</p>
+
+                <h3>2️⃣ Raspberry Pi 4</h3>
+                <p>Para quem quer montar o próprio console retro, o Raspberry Pi 4 é uma excelente escolha.</p>
+                <ul>
+                    <li><strong>Vantagens:</strong> Alto nível de personalização, melhor desempenho, permite adicionar jogos manualmente, atualizações constantes.</li>
+                    <li><strong>Desvantagens:</strong> Exige configuração, custo maior se incluir acessórios.</li>
+                </ul>
+                <p>É uma opção mais avançada para usuários que gostam de tecnologia.</p>
+
+                <h3>3️⃣ Powkiddy RGB20S</h3>
+                <p>Um console portátil focado em jogos retrô.</p>
+                <ul>
+                    <li><strong>Vantagens:</strong> Tela integrada, portátil, boa emulação de PS1, compacto e leve.</li>
+                    <li><strong>Desvantagens:</strong> Tela pequena para algumas pessoas, preço um pouco maior que Retro Stick.</li>
+                </ul>
+                <p>Ideal para quem quer jogar em qualquer lugar.</p>
+
+                <h3>4️⃣ Anbernic RG35XX</h3>
+                <p>Considerado um dos portáteis retrô com melhor acabamento.</p>
+                <ul>
+                    <li><strong>Vantagens:</strong> Construção premium, excelente desempenho em 8 e 16 bits, boa bateria.</li>
+                    <li><strong>Desvantagens:</strong> Não é o mais barato, configuração inicial pode exigir ajustes.</li>
+                </ul>
+
+                <h2>🏆 Como Escolher Entre os Melhores Retros?</h2>
+                <p>Para escolher entre os Melhores Retros, você precisa considerar:</p>
+                <ul>
+                    <li><strong>🎯 1. Seu objetivo:</strong> Quer praticidade? Escolha Retro Stick. Quer desempenho? Raspberry Pi. Quer mobilidade? Console portátil.</li>
+                    <li><strong>💰 2. Orçamento:</strong> Até R$200 (Retro Stick), R$300–600 (Portáteis), Acima de R$600 (Raspberry Pi ou Anbernic).</li>
+                    <li><strong>🎮 3. Tipos de Jogos:</strong> PS1 roda melhor em Raspberry Pi ou Anbernic. N64 pode ter limitações em modelos baratos. Arcade funciona bem na maioria.</li>
+                </ul>
+
+                <h2>📺 Melhores Retros Funcionam em Smart TV?</h2>
+                <p>Sim. A maioria dos consoles retros modernos possui saída HDMI e funciona em Smart TV, TV LED e Monitores com HDMI. Não é necessário internet para jogar.</p>
+
+                <h2>⚙ Melhores Retros Valem a Pena em 2026?</h2>
+                <p>Sim, especialmente para quem busca nostalgia, jogos offline, custo-benefício ou um presente criativo. Os Melhores Retros oferecem milhares de jogos por um valor acessível.</p>
+
+                <h2>⭐ Conclusão: Quais São os Melhores Retros?</h2>
+                <p>Se você quer praticidade e preço baixo, o <strong>Retro Stick</strong> é uma ótima escolha. Se deseja desempenho superior, o <strong>Raspberry Pi 4</strong> é o mais completo. Para jogar fora de casa, modelos como <strong>Powkiddy RGB20S</strong> e <strong>Anbernic RG35XX</strong> são excelentes alternativas.</p>
+            `
+        };
+
+        const melhoresGamesPost = {
+            id: 1710000000002,
+            title: "🎮 Melhores Games de 2026: Lista Completa com Prós e Contras",
+            author: "RetroStickBrasil",
+            slug: "melhores-games-lista-completa-2026",
+            date: "28/02/2026",
+            content: `
+                <p>Se você está procurando os Melhores Games para jogar em 2026, este guia completo vai te mostrar os títulos mais bem avaliados, influentes e recomendados por jogadores do mundo inteiro.</p>
+                <p>Nesta página sobre Melhores Games, você encontrará análises detalhadas, pontos positivos e negativos, além de recomendações por categoria para escolher o jogo ideal para o seu estilo.</p>
+
+                <h2>🏆 O Que Define os Melhores Games?</h2>
+                <p>Os Melhores Games não são apenas os mais vendidos. Eles se destacam por:</p>
+                <ul>
+                    <li>🎯 Jogabilidade marcante</li>
+                    <li>📖 História envolvente</li>
+                    <li>🌎 Impacto cultural</li>
+                    <li>⭐ Avaliações positivas</li>
+                    <li>🔥 Comunidade ativa</li>
+                </ul>
+
+                <h2>🎮 1️⃣ The Legend of Zelda: Ocarina of Time</h2>
+                <p>Considerado por muitos como o melhor jogo da história, revolucionou os games em 3D.</p>
+                <p><strong>🟢 Prós:</strong> História épica e memorável, sistema de mira inovador, trilha sonora icônica, grande impacto na indústria.</p>
+                <p><strong>🔴 Contras:</strong> Gráficos ultrapassados, controles podem parecer antigos.</p>
+
+                <h2>🎮 2️⃣ Super Mario World</h2>
+                <p>Um clássico absoluto da era 16 bits.</p>
+                <p><strong>🟢 Prós:</strong> Diversão para todas as idades, fases criativas, alta rejogabilidade, trilha sonora marcante.</p>
+                <p><strong>🔴 Contras:</strong> Curto comparado a jogos modernos, simples para jogadores hardcore.</p>
+
+                <h2>🎮 3️⃣ Minecraft</h2>
+                <p>Um fenômeno global que redefiniu criatividade nos games.</p>
+                <p><strong>🟢 Prós:</strong> Liberdade total de criação, atualizações constantes, multiplayer ativo, enorme comunidade.</p>
+                <p><strong>🔴 Contras:</strong> Gráficos simples, pode ser confuso no início.</p>
+
+                <h2>🎮 4️⃣ The Witcher 3: Wild Hunt</h2>
+                <p>Um dos RPGs mais premiados da história.</p>
+                <p><strong>🟢 Prós:</strong> História profunda, mundo aberto detalhado, missões secundárias incríveis, personagens marcantes.</p>
+                <p><strong>🔴 Contras:</strong> Exige tempo para aproveitar, combate pode parecer complexo.</p>
+
+                <h2>🎮 5️⃣ Grand Theft Auto V</h2>
+                <p>Um dos jogos mais vendidos de todos os tempos.</p>
+                <p><strong>🟢 Prós:</strong> Mundo aberto gigantesco, multiplayer online ativo, personagens carismáticos, alta liberdade de ação.</p>
+                <p><strong>🔴 Contras:</strong> Conteúdo adulto, pode se tornar repetitivo.</p>
+
+                <h2>🎮 6️⃣ Red Dead Redemption 2</h2>
+                <p>Experiência cinematográfica no Velho Oeste.</p>
+                <p><strong>🟢 Prós:</strong> Narrativa emocionante, gráficos impressionantes, ambientação realista, personagens profundos.</p>
+                <p><strong>🔴 Contras:</strong> Ritmo mais lento, arquivo muito pesado.</p>
+
+                <h2>🎮 7️⃣ Dark Souls</h2>
+                <p>Conhecido pelo alto nível de dificuldade.</p>
+                <p><strong>🟢 Prós:</strong> Combate técnico e profundo, sistema de progressão recompensador, mundo interconectado, alta satisfação ao vencer desafios.</p>
+                <p><strong>🔴 Contras:</strong> Extremamente difícil, poucas explicações para iniciantes.</p>
+
+                <h2>📊 Melhores Games por Categoria</h2>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.8rem;">
+                    <thead>
+                        <tr style="background: #f0f0f0; border-bottom: 2px solid #000;">
+                            <th style="padding: 10px; text-align: left;">Categoria</th>
+                            <th style="padding: 10px; text-align: left;">Melhor Game</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 10px;">🎭 História</td>
+                            <td style="padding: 10px;">The Witcher 3</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 10px;">🌍 Mundo Aberto</td>
+                            <td style="padding: 10px;">GTA V</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 10px;">🧱 Criatividade</td>
+                            <td style="padding: 10px;">Minecraft</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 10px;">👑 Clássico Retro</td>
+                            <td style="padding: 10px;">Super Mario World</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 10px;">🗡️ Desafio</td>
+                            <td style="padding: 10px;">Dark Souls</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 10px;">🏹 Aventura</td>
+                            <td style="padding: 10px;">Zelda Ocarina of Time</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>🎯 Como Escolher Entre os Melhores Games?</h2>
+                <p>Para escolher entre os Melhores Games, considere seu estilo (Aventura, RPG, Desafio, etc), o tempo disponível e a plataforma que você possui.</p>
+
+                <h2>📈 Por Que Esses São Considerados os Melhores Games?</h2>
+                <p>Eles marcaram gerações porque revolucionaram mecânicas, criaram padrões na indústria e continuam populares anos após o lançamento.</p>
+
+                <h2>🏁 Conclusão: Vale a Pena Jogar os Melhores Games?</h2>
+                <p>Sim. Os Melhores Games são experiências que todo gamer deveria experimentar pelo menos uma vez. Seja pela nostalgia, pela inovação ou pela imersão, esses títulos continuam relevantes em 2026.</p>
+            `
+        };
+
+        let posts = JSON.parse(localStorage.getItem('editorial_posts')) || [];
+        
+        // Ensure the new posts are present
+        if (!posts.find(p => p.id === 1710000000000)) {
+            posts.unshift(reviewPost);
+        }
+        if (!posts.find(p => p.id === 1710000000001)) {
+            posts.unshift(melhoresRetrosPost);
+        }
+        if (!posts.find(p => p.id === 1710000000002)) {
+            posts.unshift(melhoresGamesPost);
+        }
+        localStorage.setItem('editorial_posts', JSON.stringify(posts));
+
+        if (posts.length === 0) {
+            posts = [melhoresGamesPost, melhoresRetrosPost, reviewPost, defaultPost];
+            localStorage.setItem('editorial_posts', JSON.stringify(posts));
+        }
+        
+        let adminUser = JSON.parse(localStorage.getItem('editorial_user')) || { u: 'admin', p: 'retrostick2026' };
+        let isAuth = sessionStorage.getItem('editorial_session') === 'true';
+
+        // --- COOKIE FUNCTIONS ---
+        function checkCookies() {
+            if (!localStorage.getItem('cookies_accepted')) {
+                const banner = document.getElementById('cookie-banner');
+                if (banner) banner.style.display = 'flex';
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookies_accepted', 'true');
+            const banner = document.getElementById('cookie-banner');
+            if (banner) banner.style.display = 'none';
+        }
+
+        // --- APP INIT ---
+        window.onload = () => {
+            updateNavbar();
+            handleRouting();
+            checkCookies();
+        };
+
+        window.onpopstate = () => {
+            handleRouting();
+        };
+
+        // --- ROUTING ---
+        function handleRouting() {
+            const params = new URLSearchParams(window.location.search);
+            const postId = params.get('id');
+            const postSlug = params.get('p');
+
+            if (postId) {
+                navigateTo('post-detail', { id: parseInt(postId) }, false);
+            } else if (postSlug) {
+                const post = posts.find(p => p.slug === postSlug);
+                if (post) navigateTo('post-detail', { id: post.id }, false);
+                else navigateTo('home', {}, false);
+            } else {
+                navigateTo('home', {}, false);
+            }
+        }
+
+        function navigateTo(viewId, data = {}, push = true) {
+            const main = document.getElementById('main-view');
+            main.innerHTML = '';
+
+            if (viewId === 'admin' && !isAuth) {
+                navigateTo('login', {}, push);
+                return;
+            }
+
+            // Update URL for SEO/Search Console
+            if (push) {
+                const url = new URL(window.location);
+                if (viewId === 'post-detail' && data.id) {
+                    const post = posts.find(p => p.id === data.id);
+                    if (post && post.slug) {
+                        url.searchParams.set('p', post.slug);
+                        url.searchParams.delete('id');
+                    } else {
+                        url.searchParams.set('id', data.id);
+                        url.searchParams.delete('p');
+                    }
+                    window.history.pushState({}, '', url);
+                } else if (viewId === 'home') {
+                    url.searchParams.delete('id');
+                    url.searchParams.delete('p');
+                    window.history.pushState({}, '', url);
+                }
+            }
+
+            const tpl = document.getElementById(`tpl-${viewId}`);
+            const content = tpl.content.cloneNode(true);
+            main.appendChild(content);
+
+            if (viewId === 'home') renderHome();
+            if (viewId === 'post-detail') renderPost(data.id);
+            if (viewId === 'login') renderLogin();
+            if (viewId === 'admin') renderAdmin();
+            if (viewId === 'affiliates') { /* No specific render needed */ }
+            if (viewId === 'privacy') { /* No specific render needed */ }
+            if (viewId === 'terms') { /* No specific render needed */ }
+            if (viewId === 'contact') { /* No specific render needed */ }
+            if (viewId === 'about') { /* No specific render needed */ }
+            
+            window.scrollTo(0, 0);
+        }
+
+        function updateNavbar() {
+            const login = document.getElementById('nav-login');
+            const admin = document.getElementById('nav-admin');
+
+            if (isAuth) {
+                login.classList.add('hidden');
+                admin.classList.remove('hidden');
+            } else {
+                login.classList.remove('hidden');
+                admin.classList.add('hidden');
+            }
+        }
+
+        // --- AUTH ---
+        function renderLogin() {
+            // Login view rendered
+        }
+
+        function handleAuth() {
+            const u = document.getElementById('auth-u').value;
+            const p = document.getElementById('auth-p').value;
+
+            if (!u || !p) return;
+
+            if (u === adminUser.u && p === adminUser.p) {
+                loginOk();
+            } else {
+                alert('Acesso negado. Verifique seu usuário e senha.');
+            }
+        }
+
+        function loginOk() {
+            isAuth = true;
+            sessionStorage.setItem('editorial_session', 'true');
+            updateNavbar();
+            navigateTo('admin');
+        }
+
+        function logout() {
+            isAuth = false;
+            sessionStorage.removeItem('editorial_session');
+            updateNavbar();
+            navigateTo('home');
+        }
+
+        function resetToDefaultAuth() {
+            if (confirm('Deseja resetar o acesso para o padrão (admin / retrostick2026)?')) {
+                adminUser = { u: 'admin', p: 'retrostick2026' };
+                localStorage.setItem('editorial_user', JSON.stringify(adminUser));
+                alert('Acesso resetado! Tente logar agora.');
+            }
+        }
+
+        function updateAdminAuth() {
+            const u = document.getElementById('new-u').value;
+            const p = document.getElementById('new-p').value;
+
+            if (!u || !p) {
+                alert('Preencha o usuário e a senha.');
+                return;
+            }
+
+            if (confirm('Tem certeza que deseja mudar seus dados de acesso? Você precisará logar novamente.')) {
+                adminUser = { u, p };
+                localStorage.setItem('editorial_user', JSON.stringify(adminUser));
+                alert('Dados de acesso atualizados com sucesso!');
+                logout();
+            }
+        }
+
+        // --- CONTENT ---
+        function renderHome() {
+            const container = document.getElementById('home-posts');
+            if (posts.length === 0) {
+                container.innerHTML = '<p>Nenhum guia publicado ainda.</p>';
+                return;
+            }
+
+            const sorted = [...posts].sort((a, b) => b.id - a.id);
+            sorted.forEach(p => {
+                const div = document.createElement('div');
+                div.style.marginBottom = '40px';
+                div.innerHTML = `
+                    <h3 class="sans" style="font-size: 1.5rem; margin-bottom: 10px;">
+                        <a onclick="navigateTo('post-detail', {id: ${p.id}})">${p.title}</a>
+                    </h3>
+                    <div class="article-meta" style="border:0; margin-bottom: 10px;">
+                        <span>${p.author}</span> | <span>${p.date}</span>
+                    </div>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">${strip(p.content).substring(0, 180)}...</p>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function renderPost(id) {
+            const p = posts.find(x => x.id === id);
+            if (!p) { navigateTo('home'); return; }
+
+            document.getElementById('view-title').innerText = p.title;
+            document.getElementById('view-author').innerText = p.author;
+            document.getElementById('view-date').innerText = p.date;
+            
+            const contentEl = document.getElementById('view-content');
+            let content = p.content;
+            
+            // If no HTML tags are detected, auto-format for display
+            if (!/<[a-z][\s\S]*>/i.test(content)) {
+                content = content.split('\n\n')
+                    .map(block => {
+                        block = block.trim();
+                        if (block.length < 60 && !block.includes('.') && block.length > 0) {
+                            return `<h2>${block}</h2>`;
+                        }
+                        return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+                    })
+                    .join('\n');
+            }
+            
+            contentEl.innerHTML = content;
+
+            // Dynamic Reading Time
+            const words = strip(content).split(/\s+/).length;
+            const minutes = Math.ceil(words / 200);
+            document.getElementById('view-reading-time').innerText = `${minutes} min de leitura`;
+
+            // Generate TOC
+            const tocList = document.getElementById('toc-list');
+            tocList.innerHTML = ''; // Clear previous TOC
+            const headings = Array.from(contentEl.querySelectorAll('h2')).slice(0, 5); // Limit to 5
+            if (headings.length === 0) {
+                document.getElementById('view-toc').classList.add('hidden');
+            } else {
+                document.getElementById('view-toc').classList.remove('hidden'); // Ensure it's visible
+                headings.forEach((h, i) => {
+                    const id = `section-${i}`;
+                    h.id = id;
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="#${id}"><span style="font-weight:bold; margin-right:8px; color:#000;">0${i+1}.</span> ${h.innerText}</a>`;
+                    tocList.appendChild(li);
+                });
+            }
+
+            // Popular Posts in Sidebar
+            const popularList = document.getElementById('popular-list');
+            if (popularList) {
+                popularList.innerHTML = '';
+                const others = posts.filter(x => x.id !== id).slice(0, 3);
+                others.forEach(op => {
+                    const item = document.createElement('div');
+                    item.style.marginBottom = '10px';
+                    item.style.cursor = 'pointer';
+                    item.onclick = () => navigateTo('post-detail', {id: op.id});
+                    item.innerHTML = `
+                        <h4 style="font-family: Georgia, serif; font-size: 0.85rem; margin-bottom: 2px; line-height: 1.2;">${op.title}</h4>
+                        <span style="font-size: 0.6rem; opacity: 0.5; text-transform: uppercase; font-family: Helvetica, sans-serif;">${op.date}</span>
+                    `;
+                    popularList.appendChild(item);
+                });
+            }
+
+            // Recent Posts in Sidebar (7 posts)
+            const recentSidebarList = document.getElementById('recent-sidebar-list');
+            if (recentSidebarList) {
+                recentSidebarList.innerHTML = '';
+                const recentPosts = [...posts]
+                    .sort((a, b) => b.id - a.id)
+                    .filter(x => x.id !== id)
+                    .slice(0, 7);
+                
+                recentPosts.forEach(rp => {
+                    const item = document.createElement('div');
+                    item.style.marginBottom = '10px';
+                    item.style.paddingBottom = '8px';
+                    item.style.borderBottom = '1px solid #f0f0f0';
+                    item.style.cursor = 'pointer';
+                    item.onclick = () => navigateTo('post-detail', {id: rp.id});
+                    item.innerHTML = `
+                        <h4 style="font-family: Georgia, serif; font-size: 0.85rem; margin-bottom: 2px; line-height: 1.2;">${rp.title}</h4>
+                        <span style="font-size: 0.6rem; opacity: 0.5; text-transform: uppercase; font-family: Helvetica, sans-serif;">${rp.date}</span>
+                    `;
+                    recentSidebarList.appendChild(item);
+                });
+            }
+        }
+
+        // --- ADMIN ---
+        function renderAdmin() {
+            const list = document.getElementById('admin-posts-list');
+            list.innerHTML = '';
+
+            posts.forEach(p => {
+                const baseUrl = window.location.origin + window.location.pathname;
+                const postUrl = p.slug ? `${baseUrl}?p=${p.slug}` : `${baseUrl}?id=${p.id}`;
+
+                const div = document.createElement('div');
+                div.style.border = '1px solid #000';
+                div.style.padding = '15px';
+                div.style.marginBottom = '15px';
+                div.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-weight: bold; font-family: Helvetica, sans-serif; font-size: 0.9rem;">${p.title}</span>
+                        <div style="display: flex; gap: 5px;">
+                            <button class="btn-action" style="padding: 4px 8px; font-size: 0.6rem;" onclick="editPost(${p.id})">Editar</button>
+                            <button class="btn-action" style="padding: 4px 8px; font-size: 0.6rem; background: #ff4444; color: #fff; border-color: #ff4444;" onclick="deletePost(${p.id})">Excluir</button>
+                        </div>
+                    </div>
+                    <div style="background: #f4f4f4; padding: 8px; border: 1px dashed #ccc; display: flex; justify-content: space-between; align-items: center;">
+                        <code style="font-size: 0.65rem; color: #333; word-break: break-all;">${postUrl}</code>
+                        <button class="btn-action" style="padding: 2px 6px; font-size: 0.55rem; white-space: nowrap; margin-left: 10px;" onclick="copyToClipboard('${postUrl}')">Copiar URL</button>
+                    </div>
+                    <p style="font-size: 0.6rem; margin-top: 5px; opacity: 0.6;">Use esta URL para indexar no Google Search Console.</p>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('URL copiada para a área de transferência!');
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+        }
+
+        function savePost() {
+            const id = document.getElementById('edit-id').value;
+            const title = document.getElementById('post-title').value;
+            const author = document.getElementById('post-author').value;
+            const slug = document.getElementById('post-slug').value || title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+            let content = document.getElementById('post-content').value;
+
+            if (!title || !content) { alert('Título e conteúdo são obrigatórios.'); return; }
+
+            // AUTO-FORMAT: If no HTML tags are detected, convert line breaks to <p> and <h2>
+            if (!/<[a-z][\s\S]*>/i.test(content)) {
+                content = content.split('\n\n')
+                    .map(block => {
+                        block = block.trim();
+                        if (block.length < 60 && !block.includes('.') && block.length > 0) {
+                            return `<h2>${block}</h2>`;
+                        }
+                        return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+                    })
+                    .join('\n');
+            }
+
+            if (id) {
+                const idx = posts.findIndex(x => x.id == id);
+                posts[idx] = { ...posts[idx], title, author, slug, content };
+            } else {
+                posts.push({
+                    id: Date.now(),
+                    title,
+                    author,
+                    slug,
+                    content,
+                    date: new Date().toLocaleDateString('pt-BR')
+                });
+            }
+
+            localStorage.setItem('editorial_posts', JSON.stringify(posts));
+            resetEditor();
+            renderAdmin();
+            alert('Artigo publicado e formatado com sucesso!');
+        }
+
+        function applyAutoFormat() {
+            const el = document.getElementById('post-content');
+            let text = el.value;
+            if (!text) return;
+
+            // Simple logic: split by double newlines, wrap in <p>, detect short lines as <h2>
+            const formatted = text.split('\n\n')
+                .map(block => {
+                    block = block.trim();
+                    if (block.length < 60 && !block.includes('.') && block.length > 0) {
+                        return `<h2>${block}</h2>`;
+                    }
+                    return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+                })
+                .join('\n\n');
+            
+            el.value = formatted;
+        }
+
+        function editPost(id) {
+            const p = posts.find(x => x.id === id);
+            if (!p) return;
+
+            document.getElementById('edit-id').value = p.id;
+            document.getElementById('post-title').value = p.title;
+            document.getElementById('post-author').value = p.author;
+            document.getElementById('post-slug').value = p.slug;
+            document.getElementById('post-content').value = p.content;
+            document.getElementById('editor-title').innerText = 'EDITANDO ARTIGO';
+            window.scrollTo(0, 0);
+        }
+
+        function deletePost(id) {
+            if (confirm('Excluir este artigo permanentemente?')) {
+                posts = posts.filter(x => x.id !== id);
+                localStorage.setItem('editorial_posts', JSON.stringify(posts));
+                renderAdmin();
+            }
+        }
+
+        function resetEditor() {
+            document.getElementById('edit-id').value = '';
+            document.getElementById('post-title').value = '';
+            document.getElementById('post-author').value = '';
+            document.getElementById('post-slug').value = '';
+            document.getElementById('post-content').value = '';
+            document.getElementById('editor-title').innerText = 'NOVO ARTIGO';
+        }
+
+        function wipeData() {
+            if (confirm('Isso apagará seus artigos e resetará para o exemplo. Tem certeza?')) {
+                posts = [defaultPost];
+                localStorage.setItem('editorial_posts', JSON.stringify(posts));
+                renderAdmin();
+            }
+        }
+
+        function strip(html) {
+            const tmp = document.createElement("DIV");
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || "";
+        }
+    </script>
+</body>
+</html>
